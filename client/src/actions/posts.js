@@ -1,4 +1,6 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, EDIT } from '../constants/actionTypes';
+// import { EDIT } from '../constants/actionTypes';
+
 
 import * as api from '../api/index.js';
 
@@ -9,6 +11,8 @@ export const getPosts = () => async (dispatch) => {
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
     console.log(error.message);
+    console.log(getPosts());
+
   }
 };
 
@@ -47,6 +51,16 @@ export const deletePost = (id) => async (dispatch) => {
     await api.deletePost(id);
 
     dispatch({ type: DELETE, payload: id });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const editPost = (id) => async (dispatch) => {
+  try {
+    await api.editPost(id);
+
+    dispatch({ type: EDIT, payload: id });
   } catch (error) {
     console.log(error.message);
   }
